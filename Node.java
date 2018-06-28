@@ -1,5 +1,14 @@
 import java.util.ArrayList;
 
+/*
+ name - имя вершины(её номер)
+ relateNode - список смежых вершин
+ GetList - return список смежных вершин
+ CheckNode(N) - проверяет, смежна ли вершина с вершиной N
+ AddEdge - добавляет ребро между вершмной и вершиной N
+ GetName - return имя вершины
+ ShowRelateNode - вывод смжных вершин с вершиной
+*/
 public class node {
     private int name;
     private ArrayList<node> relateNode;
