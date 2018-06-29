@@ -33,7 +33,7 @@ public class graph {
     {
         return nodes.get(a);
     }
-    public  node GetNodeOfName(int a)
+    public  node GetNodeOfName(String a)
     {
         node ans = new node();
         for(node elem : nodes)
@@ -46,9 +46,9 @@ public class graph {
         }
         return ans;
     }
-    public  int GetPosOfName(int a)
+    public  String GetPosOfName(String a)
     {
-        int pos = -1;
+        String pos = "";
         for(node elem : nodes)
         {
             if (elem.GetName() == a)
@@ -78,11 +78,11 @@ public class graph {
 
 
 
-    public void AddNode(int N)
+    public void AddNode(String N)
     {
         nodes.add(new node(N));
     }
-    public void CreateRelat(int a,int b)
+    public void CreateRelat(String a,String b)
     {
         /*Создали две вершины*/
         node E1 = new node();
