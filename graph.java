@@ -20,10 +20,64 @@ public class graph {
     {
         return nodes.size();
     }
+    public ArrayList<node> GetList()
+    {
+        return nodes;
+    }
+    /*Добавлено независимый регистр*/
+    //Раньше: добавлена вершина 4 первая, регситр 1
+    //Теперь:добавлена вершина 4 первая, регистр 4
+
+
     public  node GetNodeOfIndex(int a)
     {
         return nodes.get(a);
     }
+    public  node GetNodeOfName(int a)
+    {
+        node ans = new node();
+        for(node elem : nodes)
+        {
+            if (elem.GetName() == a)
+            {
+                ans = elem;
+                break;
+            }
+        }
+        return ans;
+    }
+    public  int GetPosOfName(int a)
+    {
+        int pos = -1;
+        for(node elem : nodes)
+        {
+            if (elem.GetName() == a)
+            {
+                pos = elem.GetName();
+                break;
+            }
+        }
+        return pos;
+    }
+    public  int GetPosOfNode(node a)
+    {
+        int pos = 0;
+        for(node elem : nodes)
+        {
+            if (elem == a)
+            {
+
+                break;
+            }
+            pos++;
+        }
+        return pos;
+    }
+
+
+
+
+
     public void AddNode(int N)
     {
         nodes.add(new node(N));
@@ -33,8 +87,8 @@ public class graph {
         /*Создали две вершины*/
         node E1 = new node();
         node E2 = new node();
-        
-        
+
+
         int flag = 0;
         for(node elem : nodes){
             if (elem.GetName() == a)
