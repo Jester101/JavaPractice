@@ -50,6 +50,7 @@ public class node {
     /*
         Next Functions provides additional opportunities
     */
+    public int GetNumRelateNodes(){return relateNode.size();}
     public int GetName()
     {
         return name;
