@@ -10,13 +10,13 @@ import java.util.ArrayList;
  ShowRelateNode - вывод смжных вершин с вершиной
 */
 public class node {
-    private int name;
+    private String name;
     private ArrayList<node> relateNode;
     public node()
     {
 
     }
-    public node(int NameNode)
+    public node(String NameNode)
     {
         name = NameNode;
         relateNode = new ArrayList<node>();
@@ -51,7 +51,7 @@ public class node {
         Next Functions provides additional opportunities
     */
     public int GetNumRelateNodes(){return relateNode.size();}
-    public int GetName()
+    public String GetName()
     {
         return name;
     }
