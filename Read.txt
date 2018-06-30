@@ -1,0 +1,24 @@
+Класс Граф:
+nodes - вершины в графе(type node)
+GetNumNodes - Return количесвто вершин
+GetList
+GetNodeOfIndex
+GetNodeOfName
+GetPosOfName
+GetPosOfNode
+AddNode - Добавляет вершину в граф
+CreateRelat - создаёт ребро между вершинами
+
+
+Класс Врешина
+name - имя вершины(её номер)
+relateNode - список смежых вершин
+GetList - return список смежных вершин
+CheckNode(N) - проверяет, смежна ли вершина с вершиной N
+AddEdge - добавляет ребро между вершмной и вершиной N
+GetName - return имя вершины
+ShowRelateNode - вывод смжных вершин с вершиной
+
+
+Класс DFS
+УУУУУУУ, а тут магия от Женька :)
