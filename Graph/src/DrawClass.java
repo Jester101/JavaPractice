@@ -92,35 +92,32 @@ public class DrawClass extends JFrame {
 
     }
 
-    public void DrawBriedge(Graph NodesGraph)
+   public void DrawBriedge(Graph NodesGraph)
     {
-        /*Стиль для моста*/
+
         Map<String, Object> StyleForBridge = new HashMap<String, Object>();
         StyleForBridge.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
         StyleForBridge.put(mxConstants.STYLE_STROKECOLOR, "#ff0000"); // default is #6482B9
         mxStylesheet edgeStyle = new mxStylesheet();
         edgeStyle.setDefaultEdgeStyle(StyleForBridge);
         graph.setStylesheet(edgeStyle);
-        /**/
+
 
         FindBridge a = new FindBridge(NodesGraph);
-        ArrayList<SimpleNode> Bridges = a.FindBridges();
-
+        ArrayList<Edge> Bridges = a.FindBridges();
         try
         {
-            for(int i = 0;i <Bridges.size();i = i + 2) {
-                graph.insertEdge(parent, null, "", Bridges.get(i).getPictrue(),Bridges.get(i+1).getPictrue());
-                System.out.print(Bridges.get(i).getName());
-                System.out.print(' ');
-                System.out.println(Bridges.get(i+1).getName());
+            for(int i = 0;i <Bridges.size();i++) {
+                graph.insertEdge(parent, null, "", Bridges.get(i).getSourceNode().getPictrue(),Bridges.get(i).getDestNode().getPictrue());
+
             }
         }
         finally
         {
-            graph.getModel().endUpdate();
+
         }
 
-        
+        graph.getModel().endUpdate();
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         getContentPane().add(graphComponent);
     }
