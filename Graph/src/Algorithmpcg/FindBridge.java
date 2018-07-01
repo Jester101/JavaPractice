@@ -15,47 +15,22 @@ public class FindBridge extends Algorithm{
     /**/
 
     private ArrayList<SimpleNode> nodes ;
+    private ArrayList<SimpleNode> edgesOfBridge;
     public FindBridge(Graph N)
     {
         SetGraph(N);
         nodes = N.getNodes();
+        edgesOfBridge = new ArrayList<SimpleNode>() ;
     }
 
 
-    public void FindBridges()
+    public ArrayList<SimpleNode> FindBridges()
     {
         int kolNodes = GetGraph().getNodes().size();//bred
 
         S = new int[kolNodes]; // Star
         Up = new int[kolNodes]; // End
         Res = new boolean[kolNodes]; // Most or no
-
-
-        /*
-        for(int i = 0; i < kolNodes;i++)
-        {
-            System.out.print(nodes.get(i).getName());
-            System.out.print(": ");
-            for(Edge TMP: nodes.get(i).getEdgesList())
-            {
-                if(nodes.get(i) != TMP.getDestNode())
-                {
-                    System.out.print(TMP.getDestNode().getName());
-                }
-                else
-                {
-                    System.out.print(TMP.getSourceNode().getName());
-                }
-
-                System.out.print(' ');
-            }
-            System.out.println();
-        }
-
-
-        System.out.println();
-        */
-
 
         for(int i = 0;i < kolNodes;i++)
         {
@@ -64,6 +39,7 @@ public class FindBridge extends Algorithm{
                 DPS(i,0);
             }
         }
+        return edgesOfBridge;
     }
 
     public void DPS(int v,int p)
@@ -98,9 +74,10 @@ public class FindBridge extends Algorithm{
                 DPS(to, v);
                 Up[v] = Math.min(Up[v], Up[to]);
                 if (Up[to] > S[v]) {
-                    System.out.print(nodes.get(v).getName());
-                    System.out.print(' ');
-                    System.out.println(nodes.get(to).getName());
+
+                    edgesOfBridge.add(nodes.get(v));
+                    edgesOfBridge.add(nodes.get(to));
+
                 }
             }
         }
