@@ -15,16 +15,16 @@ public class FindBridge extends Algorithm{
     /**/
 
     private ArrayList<SimpleNode> nodes ;
-    private ArrayList<SimpleNode> edgesOfBridge;
+    private ArrayList<Edge> edgesOfBridge;
     public FindBridge(Graph N)
     {
         SetGraph(N);
         nodes = N.getNodes();
-        edgesOfBridge = new ArrayList<SimpleNode>() ;
+        edgesOfBridge = new ArrayList<>() ;
     }
 
 
-    public ArrayList<SimpleNode> FindBridges()
+    public ArrayList<Edge> FindBridges()
     {
         int kolNodes = GetGraph().getNodes().size();//bred
 
@@ -50,12 +50,9 @@ public class FindBridge extends Algorithm{
         Res[v] = true;
         S[v] = Up[v] = time++;
 
-        //GetNodeOfIndex - get
-        //nodes.get()
-
         SimpleNode elem;
-        for(Edge TMP: nodes.get(v).getEdgesList()) { //pass through the list of adjacent vertices
-            //elem= TMP.getDestNode();
+        for(Edge TMP: nodes.get(v).getEdgesList()) {
+
             if(nodes.get(v) != TMP.getDestNode())
             {
                 elem = TMP.getDestNode();
@@ -75,9 +72,24 @@ public class FindBridge extends Algorithm{
                 Up[v] = Math.min(Up[v], Up[to]);
                 if (Up[to] > S[v]) {
 
-                    edgesOfBridge.add(nodes.get(v));
-                    edgesOfBridge.add(nodes.get(to));
+                    for(Edge elemEdge:nodes.get(v).getEdgesList())
+                    {
+                        if (nodes.get(v) == elemEdge.getDestNode())
+                        {
+                            if (nodes.get(to) == elemEdge.getSourceNode())
+                            {
+                                edgesOfBridge.add(elemEdge);
+                            }
+                        }
 
+                        else
+                        {
+                            if (nodes.get(to) == elemEdge.getDestNode())
+                            {
+                                edgesOfBridge.add(elemEdge);
+                            }
+                        }
+                    }
                 }
             }
         }
