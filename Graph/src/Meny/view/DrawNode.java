@@ -12,7 +12,7 @@ public class DrawNode {
 
     private Color color;
 
-    public DrawNode(String text, double xPos, double yPos, Meny.view.Graphics graphics) {
+    public DrawNode(String text, double xPos, double yPos) {
         setPos(xPos,yPos);
         this.text = text;
         setGraphics(graphics);
@@ -25,16 +25,16 @@ public class DrawNode {
         this.yPos = yPos;
     }
 
-    int getxPos() {
+    public int getxPos() {
         return (int)xPos;
     }
 
-    int getyPos() {
+    public int getyPos() {
         return (int)yPos;
     }
 
     public void draw(Color color) {
-        graphics.drawOval((int)xPos,(int)yPos,80,80,color.getRGB());
+     //   graphics.drawOval((int)xPos,(int)yPos,80,80,color.getRGB());
         setText(text);
       //  drawBackGround(Color.WHITE);
     }
@@ -44,7 +44,11 @@ public class DrawNode {
     }
 
     public void setText(String text) {
-        graphics.drawText((int)xPos,(int)yPos,text,color.getRGB());
+      //  graphics.drawText((int)xPos,(int)yPos,text,color.getRGB());
+    }
+
+    public String getName(){
+        return text;
     }
 
     void setGraphics(Meny.view.Graphics graphics) {

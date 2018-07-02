@@ -31,13 +31,32 @@ public class Launcher extends JFrame {
 
     private void init() {
 
-       // mainWindow.setNameForControlPanel("Find Bridges Algorithm");
+        mainWindow.setNameForControlPanel("Find Bridges Algorithm");
         Graph<SimpleNode> NodeGraph = new Graph(SimpleNode::new);
-        NodeGraph.addNode("First");
-        NodeGraph.addNode("Second");
-        NodeGraph.addNode("Third");
-        NodeGraph.ConnectNodes("First","Second");
-        NodeGraph.ConnectNodes("First","Third");
+
+        NodeGraph.addNode("Могилев");
+        NodeGraph.addNode("Минск");
+        NodeGraph.addNode("Витебск");
+        NodeGraph.addNode("Гомель");
+
+        NodeGraph.addNode("Санкт-Петербург");
+        NodeGraph.addNode("Москва");
+        NodeGraph.addNode("Архангельск");
+
+        NodeGraph.addNode("New-York");
+        NodeGraph.addNode("LosAngeles");
+
+
+        NodeGraph.ConnectNodes("Могилев","Минск");
+        NodeGraph.ConnectNodes("Могилев","Гомель");
+        NodeGraph.ConnectNodes("Могилев","Витебск");
+        NodeGraph.ConnectNodes("Минск","Витебск");
+        NodeGraph.ConnectNodes("Минск","New-York");
+        NodeGraph.ConnectNodes("LosAngeles","New-York");
+        NodeGraph.ConnectNodes("Санкт-Петербург","Витебск");
+        NodeGraph.ConnectNodes("Санкт-Петербург","Москва");
+        NodeGraph.ConnectNodes("Санкт-Петербург","Архангельск");
+        NodeGraph.ConnectNodes("Москва","Архангельск");
 
         System.out.println(mainWindow == null);
         System.out.println(mainWindow.getVisualPanel() == null);
@@ -47,7 +66,7 @@ public class Launcher extends JFrame {
 
         DrawGraph drawGraph = new DrawGraph(NodeGraph);
         if(mainWindow.getVisualPanel().getGraphics() != null)
-            drawGraph.drawGraph(new SwingGraphics((JPanel)mainWindow.getVisualPanel(),gr));
+            drawGraph.drawGraph(mainWindow.getVisualPanel());
         //DrawGraph drawGraph = new DrawGraph(NodeGraph,new SwingGraphics(this,panel.getGraphics()));
 
     }

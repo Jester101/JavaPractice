@@ -8,7 +8,7 @@ public class MainWindow extends JPanel {
 
     private ControllPanel controll_panel = new ControllPanel();
     private EditPanel edit_panel = new EditPanel();
-    private final Component visual_panel;
+    private View visual_panel;
     private GridBagLayout layout = new GridBagLayout();
     private GridBagConstraints constraints = new GridBagConstraints();
 
@@ -16,13 +16,12 @@ public class MainWindow extends JPanel {
 
         super(null);
         initConstrains();
-        visual_panel = new JPanel();
+        visual_panel = new View();
         setLayout(layout);
         setPanelSize(edit_panel, new Dimension(240,600));
         setPanelSize(controll_panel, new Dimension(360,120));
         visual_panel.setPreferredSize(new Dimension(600,600));
         visual_panel.setVisible(true);
-        visual_panel.setBackground(new Color(32122));
         /*/
 
         * * * *     * * * * * *
@@ -76,7 +75,7 @@ public class MainWindow extends JPanel {
         constraints.gridwidth = width;
     }
 
-    public Component getVisualPanel() {
+    public View getVisualPanel() {
         return visual_panel;
     }
 
