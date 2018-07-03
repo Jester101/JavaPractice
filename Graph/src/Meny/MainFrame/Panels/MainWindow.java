@@ -32,6 +32,10 @@ public class MainWindow extends JPanel {
         add(visual_panel,constraints);
     }
 
+    public ControllPanel getControllPanel() {
+        return controll_panel;
+    }
+
     public void setView(View view){
         visual_panel = view;
         visual_panel.setVisible(true);

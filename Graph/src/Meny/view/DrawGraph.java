@@ -80,12 +80,15 @@ public class DrawGraph {
             for (Edge edge : node.getEdgesList()) {
                 if (node == edge.getSourceNode()) {
                     DrawEdge drawEdge = new DrawEdge(node.getPictrue(), edge.getDestNode().getPictrue());
+                    if(edge.getStatus())
+                        drawEdge.setColor(Color.RED);
+                    else
+                        drawEdge.setColor(Color.BLACK);
                     edgesd.add(drawEdge);
                     edge.setPicture(drawEdge);
                 }
             }
         }
-
         frame.repaint();
         view.getVisualPanel().addComponents(nodesd,edgesd);
     }

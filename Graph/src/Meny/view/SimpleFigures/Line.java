@@ -1,5 +1,6 @@
 package Meny.view.SimpleFigures;
 
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -8,6 +9,7 @@ public class Line extends Line2D {
 
     private Point p1;
     private Point p2;
+    private Color color;
 
     public Line() {
         p1 = new Point();
@@ -23,6 +25,14 @@ public class Line extends Line2D {
 
         p1 = new Point(p1x,p1y);
         p2 = new Point(p2x,p2y);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override
