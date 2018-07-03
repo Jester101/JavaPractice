@@ -38,6 +38,23 @@ public class Graph<T extends Node> {
         //else
         // throw exeption;
     }
+
+    public  boolean checkNode(String name) {
+        for(T node: nodes){
+            if(node.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
+    public void deleteNode(String name) {
+        for(T node: nodes) {
+            if(node.getName().equals(name)) {
+                node.deleteConnection();
+                node = null;
+            }
+        }
+    }
 }
 
 //public class Graph{
