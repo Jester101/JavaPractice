@@ -18,6 +18,6 @@ public abstract class Node {
         node_name = name;
     }
     abstract void addEdge(Node node);
-    abstract void deleteConnection();
+    abstract void deleteConnection(String name);
 }
 

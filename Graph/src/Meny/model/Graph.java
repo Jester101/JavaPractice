@@ -11,6 +11,7 @@ public class Graph<T extends Node> {
     public Graph(NodeFactory<T> factory) {
         this.factory = factory;
     }
+
     public void addNode(String name) {
         T node = factory.createNode(name);
         nodes.add(node);
@@ -48,10 +49,13 @@ public class Graph<T extends Node> {
     }
 
     public void deleteNode(String name) {
-        for(T node: nodes) {
-            if(node.getName().equals(name)) {
-                node.deleteConnection();
-                node = null;
+        for(int i =0;i <nodes.size();++i) {
+            if(nodes.get(i).getName().equals(name)) {
+                String name_for_delete = nodes.get(i).getName();
+                nodes.remove(i);
+                for(T node:nodes) {
+                    node.deleteConnection(name_for_delete);
+                }
             }
         }
     }

@@ -41,7 +41,8 @@ public class FindBridge extends Algorithm {
     }
 
     public void buildGraph(String[] list) {
-
+        if(list == null)
+            return;
         if(NewGraph == null) {
             Graph<SimpleNode> graph = new Graph<>(SimpleNode::new);
             setGraph(graph);
@@ -52,7 +53,6 @@ public class FindBridge extends Algorithm {
             String[] items = s.split(("\\W+"));
             ArrayList<String> temp = new ArrayList<>();
             for (int j = items.length - 1; j >= 0; --j) {
-                System.out.println(items[j]);
                 if (!NewGraph.checkNode(items[j])) {
                     NewGraph.addNode(items[j]);
                 }
@@ -65,25 +65,31 @@ public class FindBridge extends Algorithm {
             }
             temp.clear();
         }
+        editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
 
     public void AddNode(String s,String[] list) {
+        if(list == null)
+            return;
         if(!NewGraph.checkNode(s)){
             NewGraph.addNode(s);
         }
         for(String name:list) {
+            System.out.println(name);
             if(!NewGraph.checkNode(name)){
                 NewGraph.addNode(name);
             }
             NewGraph.ConnectNodes(s,name);
         }
+        editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
     public void DeleteNode(String s) {
-        if(!NewGraph.checkNode(s)){
+        if(NewGraph.checkNode(s)){
             NewGraph.deleteNode(s);
         }
+        editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
 
@@ -98,16 +104,14 @@ public class FindBridge extends Algorithm {
     public void deleteConnection(String first, String second){
         if((NewGraph.checkNode(first))&&(NewGraph.checkNode(second))) {
             SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
-            for (Edge edge : firstNode.getEdgesList()) {
-                if(edge.getDestNode().getName().equals(second)){
-                    edge.setSourseNode(null);
-                    edge.setDestNode(null);
-                }
+            firstNode.deleteConnection(second);
             }
-        }
         drawGraph.drawGraph();
     }
 
+    public void setEditor(EditPanel editor) {
+        this.editor = editor;
+    }
     public void setFrame(JFrame frame) {
         drawGraph.setFrame(frame);
     }

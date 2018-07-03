@@ -29,10 +29,11 @@ public class View extends JPanel {
     public void addComponents(ArrayList<DrawNode> nodes, ArrayList<DrawEdge> edges){
         makeNodesList(nodes);
         makeEdgeList(edges);
+        repaint();
     }
 
     private void makeNodesList(ArrayList<DrawNode> nodes) {
-
+        circles.clear();
         for(DrawNode node: nodes) {
             Circle crcl = new Circle(node.getxPos(),node.getyPos(),70);
             double cx = crcl.getCenterX();
@@ -44,7 +45,6 @@ public class View extends JPanel {
     }
 
     private void makeEdgeList(ArrayList<DrawEdge> edges) {
-
         lines.clear();
         for(DrawEdge edge: edges) {
             Line ln = new Line(edge.getStart(),edge.getEnd());
@@ -56,17 +56,15 @@ public class View extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
 
-        super.paintComponent(g);
-       // g.clearRect(0,0,1000,1000);
-       // Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)g;
         for(Circle crcl: circles) {
 
-            g.drawOval((int)crcl.getX(),(int)crcl.getY(),(int)crcl.getWidth(),(int)crcl.getHeight());
-            g.drawString(crcl.name,(int)crcl.getCenterX()-20,(int)crcl.getCenterY());
+            g2.draw(crcl);
+            g2.drawString(crcl.name,(int)crcl.getCenterX()-20,(int)crcl.getCenterY());
         }
         for(Line ln: lines) {
 
-            g.drawLine((int)ln.getX1(),(int)ln.getY1(),(int)ln.getX2(),(int)ln.getY2());
+            g2.draw(ln);
         }
 //        g2.draw(superCircle);
 //        g2.draw(superline);

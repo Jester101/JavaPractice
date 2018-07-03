@@ -21,7 +21,7 @@ public class MainWindow extends JPanel {
         setPanelSize(edit_panel, new Dimension(240,600));
         setPanelSize(controll_panel, new Dimension(360,120));
         visual_panel.setPreferredSize(new Dimension(600,600));
-        visual_panel.setVisible(true);
+      //  visual_panel.setVisible(true);
        // setElementSize(1,1);
         add(edit_panel, constraints);
         setElementPos(0,1);
@@ -30,7 +30,6 @@ public class MainWindow extends JPanel {
         setElementPos(1,0);
         setElementSize(3,3);
         add(visual_panel,constraints);
-        System.out.println(visual_panel.getGraphics());
     }
 
     public void setView(View view){

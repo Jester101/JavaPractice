@@ -59,14 +59,15 @@ public class Launcher extends JFrame {
 //        NodeGraph.ConnectNodes("Санкт-Петербург","Архангельск");
 //        NodeGraph.ConnectNodes("Москва","Архангельск");
         FindBridge findBridge = new FindBridge(NodeGraph);
-        ;
         EditPanel edit = mainWindow.getEditPanel();
         findBridge.setDrawClass(mainWindow);
         findBridge.setFrame(this);
+        mainWindow.getEditPanel().setGraph(NodeGraph);
+        findBridge.setEditor(mainWindow.getEditPanel());
         edit.addBuildButtonListener(e -> findBridge.buildGraph(edit.getTextArea()));
         edit.addEditNodeButtonListener(e -> findBridge.AddNode(edit.getEditNode(), edit.getConnection()));
         edit.addRemoveNodeButtonListener(e -> findBridge.DeleteNode(edit.getEditNode()));
         edit.addEditConnectionButtonListener(e -> findBridge.addConnection(edit.getFirstSelected(), edit.getSeconsSelected()));
-        edit.addRemoveConnectionButtonListener(e -> findBridge.deleteConnection(edit.getFirstSelected(), edit.getSeconsSelected()));
+        edit.addRemoveConnectionButtonListener(e -> findBridge.deleteConnection(edit.getFirstSelected(), edit.getDeleteSelected()));
     }
 }

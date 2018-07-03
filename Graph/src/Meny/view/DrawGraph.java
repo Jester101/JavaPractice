@@ -45,7 +45,6 @@ public class DrawGraph {
 
         nodesd.clear();
         edgesd.clear();
-        frame.repaint();
         ArrayList<SimpleNode> nodes = graph.getNodes();
         int i = 1;
 
@@ -87,7 +86,7 @@ public class DrawGraph {
             }
         }
 
-      //  view.setView(new View());
+        frame.repaint();
         view.getVisualPanel().addComponents(nodesd,edgesd);
     }
 }
