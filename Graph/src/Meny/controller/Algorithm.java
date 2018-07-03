@@ -2,10 +2,13 @@ package Meny.controller;
 
 import Meny.model.*;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public abstract class Algorithm {
-    private Graph NewGraph; // The Graph
-    Graph GetGraph(){return NewGraph;};
-    void SetGraph(Graph A){NewGraph = A;}
+    protected Graph NewGraph;
+    public Graph GetGraph(){return NewGraph;};
+    public void setGraph(Graph A){NewGraph = A;}
 
     void FindBridge(Graph A){};
 }

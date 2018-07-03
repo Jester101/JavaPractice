@@ -33,7 +33,7 @@ public class View extends JPanel {
     }
 
     private void makeNodesList(ArrayList<DrawNode> nodes) {
-
+        circles.clear();
         for(DrawNode node: nodes) {
             Circle crcl = new Circle(node.getxPos(),node.getyPos(),70);
             double cx = crcl.getCenterX();
@@ -45,7 +45,7 @@ public class View extends JPanel {
     }
 
     private void makeEdgeList(ArrayList<DrawEdge> edges) {
-
+        lines.clear();
         for(DrawEdge edge: edges) {
             Line ln = new Line(edge.getStart(),edge.getEnd());
             lines.add(ln);

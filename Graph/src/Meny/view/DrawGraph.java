@@ -1,5 +1,6 @@
 package Meny.view;
 
+import Meny.MainFrame.Panels.MainWindow;
 import Meny.MainFrame.Panels.View;
 import Meny.MainFrame.SwingGraphics;
 import Meny.model.*;
@@ -16,6 +17,7 @@ public class DrawGraph {
 
     private ArrayList<DrawNode> nodesd;
     private ArrayList<DrawEdge> edgesd;
+    private MainWindow view;
 
     public DrawGraph(Graph graph) {
         nodesd = new ArrayList<>();
@@ -31,8 +33,18 @@ public class DrawGraph {
         return graph;
     }
 
-    public void drawGraph(View view) {
+    public void setView(MainWindow view) {
+        this.view = view;
+    }
 
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public void drawGraph() {
+
+        nodesd.clear();
+        edgesd.clear();
         ArrayList<SimpleNode> nodes = graph.getNodes();
         int i = 1;
 
@@ -73,6 +85,8 @@ public class DrawGraph {
                 }
             }
         }
-        view.addComponents(nodesd,edgesd);
+
+        frame.repaint();
+        view.getVisualPanel().addComponents(nodesd,edgesd);
     }
 }

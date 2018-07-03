@@ -34,22 +34,13 @@ public class DrawEdge {
         Point p1 = new Point(first.getxPos(),first.getyPos());
         Point p2 = new Point(second.getxPos(),second.getyPos());
 
-        int r = 70;
-        r/=2;
-
+        int r = 35;
         p1.setX(p1.getX()+r);
         p1.setY(p1.getY()+r);
         p2.setX(p2.getX()+r);
         p2.setY(p2.getY()+r);
-
-//        startPoint.setLocation(p1.getX(),p1.getY());
-//        endPoint.setLocation(p2.getX(),p2.getY());
         Point left = new Point();
         Point up = new Point();
-        System.out.println(p1.getX());
-        System.out.println(p1.getY());
-        System.out.println(p2.getX());
-        System.out.println(p2.getY());
         double tan = Math.abs(p1.getX() - p2.getX())/Math.abs(p1.getY() - p2.getY());
         double si = Math.sin(Math.atan(tan));
         double co = Math.sqrt(1 - si*si);
@@ -77,13 +68,7 @@ public class DrawEdge {
             endPoint.setY(p2.getY() - r * co);
             startPoint.setY(p1.getY() + r * co);
         }
-        System.out.println(startPoint.getX());
-        System.out.println(startPoint.getY());
-        System.out.println(endPoint.getX());
-        System.out.println(endPoint.getY());
-
     }
-
     public Point getStart() {
         return startPoint;
     }

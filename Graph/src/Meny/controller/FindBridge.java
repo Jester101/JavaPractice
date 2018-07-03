@@ -1,7 +1,12 @@
 package Meny.controller;
+import Meny.MainFrame.Panels.EditPanel;
+import Meny.MainFrame.Panels.MainWindow;
+import Meny.MainFrame.Panels.View;
 import Meny.model.Edge;
 import Meny.model.*;
+import Meny.view.DrawGraph;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class FindBridge extends Algorithm {
@@ -11,6 +16,8 @@ public class FindBridge extends Algorithm {
     private int S[] ;
     private int Up[] ;
     private boolean Res[] ;
+    private EditPanel editor;
+    private DrawGraph drawGraph;
     /**/
 
     private ArrayList<SimpleNode> nodes ;
@@ -18,12 +25,96 @@ public class FindBridge extends Algorithm {
 
     public FindBridge(Graph N)
     {
-        SetGraph(N);
+        NewGraph = N;
         nodes = N.getNodes();
         edgesOfBridge = new ArrayList<>() ;
     }
 
+    @Override
+    public void setGraph(Graph A) {
+        super.setGraph(A);
+    }
 
+    public void setDrawClass(MainWindow panel) {
+        drawGraph = new DrawGraph(NewGraph);
+        drawGraph.setView(panel);
+    }
+
+    public void buildGraph(String[] list) {
+        if(list == null)
+            return;
+        if(NewGraph == null) {
+            Graph<SimpleNode> graph = new Graph<>(SimpleNode::new);
+            setGraph(graph);
+        }
+        ArrayList<SimpleNode> nodes = new ArrayList<>();
+        for(int i=0; i<list.length; ++i) {
+            String s = list[i];
+            String[] items = s.split(("\\W+"));
+            ArrayList<String> temp = new ArrayList<>();
+            for (int j = items.length - 1; j >= 0; --j) {
+                if (!NewGraph.checkNode(items[j])) {
+                    NewGraph.addNode(items[j]);
+                }
+                if (j == 0) {
+                    for (String str : temp) {
+                        NewGraph.ConnectNodes(items[0], str);
+                    }
+                } else
+                    temp.add(items[j]);
+            }
+            temp.clear();
+        }
+        editor.setGraph(NewGraph);
+        drawGraph.drawGraph();
+    }
+
+    public void AddNode(String s,String[] list) {
+        if(list == null)
+            return;
+        if(!NewGraph.checkNode(s)){
+            NewGraph.addNode(s);
+        }
+        for(String name:list) {
+            System.out.println(name);
+            if(!NewGraph.checkNode(name)){
+                NewGraph.addNode(name);
+            }
+            NewGraph.ConnectNodes(s,name);
+        }
+        editor.setGraph(NewGraph);
+        drawGraph.drawGraph();
+    }
+    public void DeleteNode(String s) {
+        if(NewGraph.checkNode(s)){
+            NewGraph.deleteNode(s);
+        }
+        editor.setGraph(NewGraph);
+        drawGraph.drawGraph();
+    }
+
+    public void addConnection(String first, String second) {
+        if((NewGraph.checkNode(first))&&(NewGraph.checkNode(second))) {
+            SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
+            firstNode.addEdge(NewGraph.findByName(second));
+        }
+        drawGraph.drawGraph();
+    }
+
+    public void deleteConnection(String first, String second){
+        if((NewGraph.checkNode(first))&&(NewGraph.checkNode(second))) {
+            SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
+            firstNode.deleteConnection(second);
+            }
+        drawGraph.drawGraph();
+    }
+
+    public void setEditor(EditPanel editor) {
+        this.editor = editor;
+    }
+    public void setFrame(JFrame frame) {
+        drawGraph.setFrame(frame);
+    }
     public ArrayList<Edge> FindBridges()
     {
         int kolNodes = GetGraph().getNodes().size();//bred

@@ -86,8 +86,20 @@ public class SimpleNode extends Node{
         ((SimpleNode) dest_node).addEdge(edge);
     }
 
+    @Override
+    public void deleteConnection(String name) {
+        for(int i =0;i <edges_list.size();++i) {
+            if(edges_list.get(i).getDestNode().getName().equals(name)) {
+                SimpleNode dest = edges_list.get(i).getDestNode();
+                edges_list.remove(i);
+                dest.deleteConnection(getName());
+            }
+        }
+    }
     private void addEdge(Edge edge) {
 
+        SimpleNode dest = edge.getSourceNode();
+        Edge newEdge = new Edge(this, (SimpleNode)dest);
         edges_list.add(edge);
     }
 

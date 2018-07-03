@@ -21,22 +21,7 @@ public class MainWindow extends JPanel {
         setPanelSize(edit_panel, new Dimension(240,600));
         setPanelSize(controll_panel, new Dimension(360,120));
         visual_panel.setPreferredSize(new Dimension(600,600));
-        visual_panel.setVisible(true);
-        /*/
-
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-        * * * *     * * * * * *
-         */
-
+      //  visual_panel.setVisible(true);
        // setElementSize(1,1);
         add(edit_panel, constraints);
         setElementPos(0,1);
@@ -45,11 +30,16 @@ public class MainWindow extends JPanel {
         setElementPos(1,0);
         setElementSize(3,3);
         add(visual_panel,constraints);
-        System.out.println(visual_panel.getGraphics());
     }
 
+    public void setView(View view){
+        visual_panel = view;
+        visual_panel.setVisible(true);
+        setElementPos(1,0);
+        add(visual_panel,constraints);
+    }
     private void initConstrains() {
-        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.anchor = GridBagConstraints.WEST;
         constraints.fill   = GridBagConstraints.HORIZONTAL;
         constraints.gridheight = 1;
         constraints.gridwidth  = 1;
@@ -78,6 +68,8 @@ public class MainWindow extends JPanel {
     public View getVisualPanel() {
         return visual_panel;
     }
+
+    public EditPanel getEditPanel() { return  edit_panel;}
 
     public void setNameForControlPanel(String name) {
 
