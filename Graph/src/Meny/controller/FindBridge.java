@@ -22,9 +22,16 @@ public class FindBridge extends Algorithm {
 
     private ArrayList<SimpleNode> nodes ;
     private ArrayList<Edge> edgesOfBridge;
+    private ArrayList<Edge> WayOfbridge;
+
+    public ArrayList<Edge> GetWat()
+    {
+        return WayOfbridge;
+    }
 
     public FindBridge(Graph N)
     {
+        WayOfbridge = new ArrayList<>();
         NewGraph = N;
         nodes = N.getNodes();
         edgesOfBridge = new ArrayList<>() ;
@@ -159,7 +166,9 @@ public class FindBridge extends Algorithm {
                 Up[v] = Math.min(Up[v], S[to]);
 
             } else {
+                WayOfbridge.add(TMP);
                 DPS(to, v);
+                WayOfbridge.add(TMP);
                 Up[v] = Math.min(Up[v], Up[to]);
                 if (Up[to] > S[v]) {
 
