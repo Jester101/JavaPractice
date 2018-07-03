@@ -40,6 +40,8 @@ public class FindBridge extends Algorithm {
     @Override
     public void setGraph(Graph A) {
         super.setGraph(A);
+        if(drawGraph != null)
+            drawGraph.setGraph(A);
     }
 
     public void setDrawClass(MainWindow panel) {
@@ -48,6 +50,8 @@ public class FindBridge extends Algorithm {
     }
 
     public void buildGraph(String[] list) {
+
+        setGraph(new Graph(SimpleNode::new));
         if(list == null)
             return;
         if(NewGraph == null) {
@@ -112,7 +116,7 @@ public class FindBridge extends Algorithm {
         if((NewGraph.checkNode(first))&&(NewGraph.checkNode(second))) {
             SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
             firstNode.deleteConnection(second);
-            }
+        }
         drawGraph.drawGraph();
     }
 
@@ -124,8 +128,8 @@ public class FindBridge extends Algorithm {
     }
     public ArrayList<Edge> FindBridges()
     {
+        NewGraph.clearBridges();
         int kolNodes = GetGraph().getNodes().size();//bred
-
         S = new int[kolNodes]; // Star
         Up = new int[kolNodes]; // End
         Res = new boolean[kolNodes]; // Most or no
@@ -137,14 +141,15 @@ public class FindBridge extends Algorithm {
                 DPS(i,0);
             }
         }
+        for (Edge edge:edgesOfBridge) {
+            edge.setBridge(true);
+        }
+        drawGraph.drawGraph();
         return edgesOfBridge;
     }
 
     public void DPS(int v,int p)
     {
-
-
-
         Res[v] = true;
         S[v] = Up[v] = time++;
 

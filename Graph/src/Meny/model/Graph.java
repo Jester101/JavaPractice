@@ -59,6 +59,14 @@ public class Graph<T extends Node> {
             }
         }
     }
+
+    public void clearBridges() {
+        for(T node:nodes) {
+            for(Edge edge:node.getEdgesList()) {
+                edge.setStatus(false);
+            }
+        }
+    }
 }
 
 //public class Graph{

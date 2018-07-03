@@ -48,6 +48,7 @@ public class View extends JPanel {
         lines.clear();
         for(DrawEdge edge: edges) {
             Line ln = new Line(edge.getStart(),edge.getEnd());
+            ln.setColor(edge.getColor());
             lines.add(ln);
         }
 
@@ -63,8 +64,9 @@ public class View extends JPanel {
             g2.drawString(crcl.name,(int)crcl.getCenterX()-20,(int)crcl.getCenterY());
         }
         for(Line ln: lines) {
-
+            g2.setColor(ln.getColor());
             g2.draw(ln);
+            g2.setColor(Color.BLACK);
         }
 //        g2.draw(superCircle);
 //        g2.draw(superline);

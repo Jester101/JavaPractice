@@ -21,12 +21,10 @@ public class DrawEdge {
         startPoint = new Point();
         endPoint = new Point();
         setPoint(first,second);
-        draw(color);
     }
 
-    void draw(Color color) {
-       // graphics.drawLine(first.getxPos(),first.getyPos(),
-      //                  second.getxPos(),second.getyPos(),color.getRGB());
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     void setPoint(DrawNode first,DrawNode second) {
@@ -77,8 +75,8 @@ public class DrawEdge {
         return endPoint;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public Color getColor() {
+        return color;
     }
 
     void setGraphics(Graphics graphics) {

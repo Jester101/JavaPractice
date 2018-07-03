@@ -7,6 +7,7 @@ public class Edge {
 
     private SimpleNode sourceNode;  //исходный узел
     private SimpleNode destNode; //конечный  узел
+    private boolean isBrtide = false;
 
     DrawEdge picture;
 
@@ -15,6 +16,18 @@ public class Edge {
         this.destNode = destNode;
     }
 
+    public void setStatus(boolean status) {
+        isBrtide = status;
+    }
+
+    public void setBridge(boolean status) {
+        isBrtide = status;
+        for (Edge edge : destNode.getEdgesList()) {
+            if (edge.destNode.getName().equals(sourceNode.getName()))
+                edge.setStatus(true);
+        }
+    }
+    public boolean getStatus() { return isBrtide;}
     public SimpleNode getSourceNode() {
         return sourceNode;
     }

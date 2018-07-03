@@ -1,5 +1,7 @@
 package Meny.model;
 
+import java.util.ArrayList;
+
 public abstract class Node {
 
     public Node(String name) {
@@ -19,5 +21,6 @@ public abstract class Node {
     }
     abstract void addEdge(Node node);
     abstract void deleteConnection(String name);
+    public abstract ArrayList<Edge> getEdgesList();
 }
 

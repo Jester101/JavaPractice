@@ -1,5 +1,6 @@
 package Meny.MainFrame;
 
+import Meny.MainFrame.Panels.ControllPanel;
 import Meny.MainFrame.Panels.EditPanel;
 import Meny.MainFrame.Panels.MainWindow;
 import Meny.controller.FindBridge;
@@ -69,5 +70,10 @@ public class Launcher extends JFrame {
         edit.addRemoveNodeButtonListener(e -> findBridge.DeleteNode(edit.getEditNode()));
         edit.addEditConnectionButtonListener(e -> findBridge.addConnection(edit.getFirstSelected(), edit.getSeconsSelected()));
         edit.addRemoveConnectionButtonListener(e -> findBridge.deleteConnection(edit.getFirstSelected(), edit.getDeleteSelected()));
+
+        ControllPanel control = mainWindow.getControllPanel();
+
+        control.addAlgButtonListener(e -> findBridge.FindBridges());
+        //control.addManualButtonListener();
     }
 }

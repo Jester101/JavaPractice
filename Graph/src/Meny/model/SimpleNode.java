@@ -72,18 +72,11 @@ public class SimpleNode extends Node{
     @Override
     public void addEdge(Node dest_node)
     {
-        /*
-        1. Проверка на принадлежность
-        2. Т.к. не ориентированный, то а -> а не имеет смысла
-        */
-
-//        if (CheckNode(n) == false && this != n)
-//        {
-//            relateNode.add(n);
-//        }
-        Edge edge = new Edge(this, (SimpleNode)dest_node);
-        edges_list.add(edge);
-        ((SimpleNode) dest_node).addEdge(edge);
+        if(!checkConnection(dest_node)) {
+            Edge edge = new Edge(this, (SimpleNode) dest_node);
+            edges_list.add(edge);
+            ((SimpleNode) dest_node).addEdge(edge);
+        }
     }
 
     @Override
@@ -101,6 +94,14 @@ public class SimpleNode extends Node{
         SimpleNode dest = edge.getSourceNode();
         Edge newEdge = new Edge(this, (SimpleNode)dest);
         edges_list.add(edge);
+    }
+
+    public boolean checkConnection(Node node) {
+        for(Edge edge : edges_list) {
+            if(edge.getDestNode().getName().equals(node.getName()))
+                return true;
+        }
+        return  false;
     }
 
     /*
