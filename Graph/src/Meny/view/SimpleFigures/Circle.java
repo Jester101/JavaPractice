@@ -1,5 +1,6 @@
 package Meny.view.SimpleFigures;
 
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
@@ -8,6 +9,8 @@ public class Circle extends Ellipse2D {
     private Point center;
     private int height = 0;
     private int width = 0;
+
+    private Color color;
 
     public String name;
 
@@ -25,7 +28,15 @@ public class Circle extends Ellipse2D {
         this.width = width;
     }
 
-    public Circle(double x, double y,int ray) {
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Circle(double x, double y, int ray) {
         center = new Point(x,y);
         this.height = ray;
         this.width = ray;

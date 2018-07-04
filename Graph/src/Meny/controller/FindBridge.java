@@ -7,6 +7,8 @@ import Meny.model.*;
 import Meny.view.DrawGraph;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FindBridge extends Algorithm {
@@ -18,11 +20,15 @@ public class FindBridge extends Algorithm {
     private boolean Res[] ;
     private EditPanel editor;
     private DrawGraph drawGraph;
+    private Timer timer;
+    private int flag = -1;
+    private int step;
     /**/
 
     private ArrayList<SimpleNode> nodes ;
     private ArrayList<Edge> edgesOfBridge;
     private ArrayList<Edge> WayOfbridge;
+    private ArrayList<SimpleNode> tmpNodes = new ArrayList<>();
 
     public ArrayList<Edge> GetWat()
     {
@@ -39,7 +45,9 @@ public class FindBridge extends Algorithm {
 
     @Override
     public void setGraph(Graph A) {
-        super.setGraph(A);
+
+        NewGraph = A;
+        nodes = NewGraph.getNodes();
         if(drawGraph != null)
             drawGraph.setGraph(A);
     }
@@ -49,33 +57,47 @@ public class FindBridge extends Algorithm {
         drawGraph.setView(panel);
     }
 
+    private boolean isBridge(Edge edge,ArrayList<Edge> list) {
+        String one = edge.getDestNode().getName();
+        String two = edge.getSourceNode().getName();
+        for(int i=0;i<list.size();++i) {
+            Edge ed = list.get(i);
+            if((ed.getDestNode().getName().equals(one))&&(ed.getSourceNode().getName().equals(two))) {
+                step = i;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void buildGraph(String[] list) {
 
-        setGraph(new Graph(SimpleNode::new));
+        Graph<SimpleNode> graph = new Graph<>(SimpleNode::new);
         if(list == null)
             return;
-        if(NewGraph == null) {
-            Graph<SimpleNode> graph = new Graph<>(SimpleNode::new);
-            setGraph(graph);
-        }
+//        if(graph == null) {
+//            Graph<SimpleNode> graph = new Graph<>(SimpleNode::new);
+//            setGraph(graph);
+//        }
         ArrayList<SimpleNode> nodes = new ArrayList<>();
         for(int i=0; i<list.length; ++i) {
             String s = list[i];
             String[] items = s.split(("\\W+"));
             ArrayList<String> temp = new ArrayList<>();
             for (int j = items.length - 1; j >= 0; --j) {
-                if (!NewGraph.checkNode(items[j])) {
-                    NewGraph.addNode(items[j]);
+                if (!graph.checkNode(items[j])) {
+                    graph.addNode(items[j]);
                 }
                 if (j == 0) {
                     for (String str : temp) {
-                        NewGraph.ConnectNodes(items[0], str);
+                        graph.ConnectNodes(items[0], str);
                     }
                 } else
                     temp.add(items[j]);
             }
             temp.clear();
         }
+        setGraph(graph);
         editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
@@ -126,8 +148,10 @@ public class FindBridge extends Algorithm {
     public void setFrame(JFrame frame) {
         drawGraph.setFrame(frame);
     }
-    public ArrayList<Edge> FindBridges()
+    public ArrayList<Edge> FindBridges(boolean step_by_step)
     {
+        edgesOfBridge.clear();
+        WayOfbridge.clear();
         NewGraph.clearBridges();
         int kolNodes = GetGraph().getNodes().size();//bred
         S = new int[kolNodes]; // Star
@@ -141,11 +165,69 @@ public class FindBridge extends Algorithm {
                 DPS(i,0);
             }
         }
-        for (Edge edge:edgesOfBridge) {
-            edge.setBridge(true);
+
+        flag = 0;
+        if(step_by_step) {
+            timer = new Timer(500,e-> updateNode());
+            timer.setRepeats(true);
+            timer.start();
+            System.out.println(edgesOfBridge);
+            System.out.println(WayOfbridge);
         }
-        drawGraph.drawGraph();
+        else {
+            for(Edge ed:edgesOfBridge)
+                ed.setBridge(true);
+            drawGraph.drawGraph();
+        }
         return edgesOfBridge;
+    }
+
+    public void updateNode() {
+        for(SimpleNode node:tmpNodes) {
+            node.setChoosen(false);
+        }
+        tmpNodes.clear();
+        if(WayOfbridge.size() != 0) {
+            if (flag == 0) {
+                tmpNodes.add(WayOfbridge.get(0).getDestNode());
+                tmpNodes.get(0).setChoosen(true);
+                tmpNodes.add(WayOfbridge.get(0).getSourceNode());
+                tmpNodes.get(1).setChoosen(true);
+                if (isBridge(WayOfbridge.get(0),edgesOfBridge))
+                    ++flag;
+                WayOfbridge.remove(0);
+            }
+            else {
+                flag = 0;
+                edgesOfBridge.get(step).setBridge(true);
+                System.out.println("status");
+            }
+            drawGraph.drawGraph();
+            return;
+        }
+        if((timer!=null)&&(timer.isRunning())) {
+            timer.stop();
+        }
+        for(SimpleNode node:tmpNodes) {
+            node.setChoosen(false);
+        }
+        tmpNodes.clear();
+        flag = -1;
+    }
+
+    void setDefaults() {
+        for (SimpleNode node: nodes) {
+            node.setChoosen(false);
+        }
+        NewGraph.clearBridges();
+    }
+
+    public void ManualStep() {
+        if(flag == -1) {
+            FindBridges(false);
+            setDefaults();
+        }
+        updateNode();
     }
 
     public void DPS(int v,int p)

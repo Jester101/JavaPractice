@@ -43,6 +43,7 @@ public class SimpleNode extends Node{
 
     private ArrayList<Edge> edges_list;
     private DrawNode pictrue;
+    private boolean isChoosen;
 
     public ArrayList<Edge> getEdgesList() {
         return edges_list;
@@ -52,6 +53,11 @@ public class SimpleNode extends Node{
         this.pictrue = pictrue;
     }
 
+    public boolean getChoosen(){return isChoosen;}
+
+    public void setChoosen(boolean choosen) {
+        isChoosen = choosen;
+    }
     public DrawNode getPictrue() {
         return pictrue;
     }

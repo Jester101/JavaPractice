@@ -71,6 +71,10 @@ public class DrawGraph {
             NY = y + (y0 - y) * Math.cos(Rot * PI / 180) + (x0 - x) * Math.sin(Rot * PI / 180) + 13;
 
             DrawNode drawNode = new DrawNode(node.getName(), NX, NY);
+            if(node.getChoosen())
+                drawNode.setColor(Color.BLUE);
+            else
+                drawNode.setColor(Color.BLACK);
             nodesd.add(drawNode);
             node.setPictrue(drawNode);
             ++i;
