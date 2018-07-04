@@ -1,4 +1,6 @@
-package Graphpcg;
+package Meny.model;
+
+import Meny.view.DrawNode;
 
 import java.util.ArrayList;
 
@@ -40,17 +42,23 @@ public class SimpleNode extends Node{
     }
 
     private ArrayList<Edge> edges_list;
-    private Object pictrue;
+    private DrawNode pictrue;
+    private boolean isChoosen;
 
     public ArrayList<Edge> getEdgesList() {
         return edges_list;
     }
 
-    public void setPictrue(Object pictrue) {
+    public void setPictrue(DrawNode pictrue) {
         this.pictrue = pictrue;
     }
 
-    public Object getPictrue() {
+    public boolean getChoosen(){return isChoosen;}
+
+    public void setChoosen(boolean choosen) {
+        isChoosen = choosen;
+    }
+    public DrawNode getPictrue() {
         return pictrue;
     }
 
@@ -70,23 +78,36 @@ public class SimpleNode extends Node{
     @Override
     public void addEdge(Node dest_node)
     {
-        /*
-        1. Проверка на принадлежность
-        2. Т.к. не ориентированный, то а -> а не имеет смысла
-        */
-
-//        if (CheckNode(n) == false && this != n)
-//        {
-//            relateNode.add(n);
-//        }
-        Edge edge = new Edge(this, (SimpleNode)dest_node);
-        edges_list.add(edge);
-        ((SimpleNode) dest_node).addEdge(edge);
+        if(!checkConnection(dest_node)) {
+            Edge edge = new Edge(this, (SimpleNode) dest_node);
+            edges_list.add(edge);
+            ((SimpleNode) dest_node).addEdge(edge);
+        }
     }
 
+    @Override
+    public void deleteConnection(String name) {
+        for(int i =0;i <edges_list.size();++i) {
+            if(edges_list.get(i).getDestNode().getName().equals(name)) {
+                SimpleNode dest = edges_list.get(i).getDestNode();
+                edges_list.remove(i);
+                dest.deleteConnection(getName());
+            }
+        }
+    }
     private void addEdge(Edge edge) {
 
+        SimpleNode dest = edge.getSourceNode();
+        Edge newEdge = new Edge(this, (SimpleNode)dest);
         edges_list.add(edge);
+    }
+
+    public boolean checkConnection(Node node) {
+        for(Edge edge : edges_list) {
+            if(edge.getDestNode().getName().equals(node.getName()))
+                return true;
+        }
+        return  false;
     }
 
     /*

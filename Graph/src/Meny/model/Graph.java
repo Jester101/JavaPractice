@@ -1,4 +1,4 @@
-package Graphpcg;
+package Meny.model;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class Graph<T extends Node> {
     public Graph(NodeFactory<T> factory) {
         this.factory = factory;
     }
+
     public void addNode(String name) {
         T node = factory.createNode(name);
         nodes.add(node);
@@ -36,7 +37,35 @@ public class Graph<T extends Node> {
         if ((sourceNode != null) && (destNode != null))
             sourceNode.addEdge(destNode);
         //else
-            // throw exeption;
+        // throw exeption;
+    }
+
+    public  boolean checkNode(String name) {
+        for(T node: nodes){
+            if(node.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
+    public void deleteNode(String name) {
+        for(int i =0;i <nodes.size();++i) {
+            if(nodes.get(i).getName().equals(name)) {
+                String name_for_delete = nodes.get(i).getName();
+                nodes.remove(i);
+                for(T node:nodes) {
+                    node.deleteConnection(name_for_delete);
+                }
+            }
+        }
+    }
+
+    public void clearBridges() {
+        for(T node:nodes) {
+            for(Edge edge:node.getEdgesList()) {
+                edge.setStatus(false);
+            }
+        }
     }
 }
 
