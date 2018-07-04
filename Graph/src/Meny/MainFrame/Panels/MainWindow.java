@@ -18,8 +18,9 @@ public class MainWindow extends JPanel {
         initConstrains();
         visual_panel = new View();
         setLayout(layout);
+        setPanelMinimumSize(visual_panel,new Dimension(600,600));
         setPanelSize(edit_panel, new Dimension(240,600));
-        setPanelSize(controll_panel, new Dimension(360,120));
+        setPanelSize(controll_panel, new Dimension(240,120));
         visual_panel.setPreferredSize(new Dimension(600,600));
       //  visual_panel.setVisible(true);
        // setElementSize(1,1);

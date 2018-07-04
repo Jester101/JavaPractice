@@ -25,6 +25,13 @@ public class DrawNode {
         this.yPos = yPos;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+   public void setColor(Color color) {
+        this.color = color;
+    }
     public int getxPos() {
         return (int)xPos;
     }
@@ -37,10 +44,6 @@ public class DrawNode {
      //   graphics.drawOval((int)xPos,(int)yPos,80,80,color.getRGB());
         setText(text);
       //  drawBackGround(Color.WHITE);
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
     public void setText(String text) {

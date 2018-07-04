@@ -42,6 +42,7 @@ public class EditPanel extends JPanel {
         name_label.setMaximumSize(new Dimension(Integer.MAX_VALUE, name_label.getMinimumSize().height));
         add(name_label, constraints);
         list_area.setPreferredSize(new Dimension(220, 200));
+        list_area.setMinimumSize(new Dimension(200,150));
         add(list_area, constraints);
         add(build_graph_button, constraints);
         add(new JLabel("Isert:Source node name"),constraints);

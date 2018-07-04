@@ -39,7 +39,7 @@ public class View extends JPanel {
             double cx = crcl.getCenterX();
             double cy = crcl.getCenterY();
             crcl.name = node.getName();
-            //crcl.setFrameFromCenter(cx,cy,cx+crcl.getHeight(),cy+crcl.getWidth());
+            crcl.setColor(node.getColor());
             circles.add(crcl);
         }
     }
@@ -58,18 +58,24 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
 
         Graphics2D g2 = (Graphics2D)g;
-        for(Circle crcl: circles) {
 
+        g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2.setStroke(new BasicStroke(3.0f));
+        for(Circle crcl: circles) {
+            g2.setColor(crcl.getColor());
             g2.draw(crcl);
+            g2.setColor(Color.BLACK);
             g2.drawString(crcl.name,(int)crcl.getCenterX()-20,(int)crcl.getCenterY());
         }
+        g2.setStroke(new BasicStroke(2.0f));
         for(Line ln: lines) {
             g2.setColor(ln.getColor());
             g2.draw(ln);
             g2.setColor(Color.BLACK);
         }
-//        g2.draw(superCircle);
-//        g2.draw(superline);
     }
 
 }

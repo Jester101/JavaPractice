@@ -59,6 +59,10 @@ public class ControllPanel extends JPanel {
         run_manual.addActionListener(listener);
     }
 
+    public boolean getRun_by_step() {
+        return run_by_step.isSelected();
+    }
+
     void setAlgorithmName(String name) {
 
         algorithm_name.setText(name);
