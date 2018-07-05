@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        Help
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="/static/main/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/main/css/style.css" rel="stylesheet">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse" role="navigation">
+    <h1>Help для работы с программой</h1>
+    <p><p>
+    <h2>Справка по компонентам редактора графа</h2>
+    <div>
+        <ol>
+            <li>Поле <b>Redact Area</b> - Зона, в которую необходимо ввесли список инцидентности</li>
+            <li>Кнопка <b>Build Graph</b> - Строит и рисует граф по списку инцидентности</li>
+            <li>Поле <b>Insert:Source node name</b> - Имя вершины, которую необходимо добавить в граф</li>
+            <li>Поле <b>Isert:List of neighbors nodes</b> - Список смежных вершин для введённой вершины</li>
+            <li>Кнопка <b>Add node</b> - добавляет вершину в граф</li>
+            <li>Кнопка <b>Delete node</b> - удаляет выбранную вершину </li>
+            <li>Поля <b>Source node name</b> и <b>Dest node name</b> - список всех вершин в графе</li>
+            <li>Поле <b>List of neighbors nodes</b> - Список смежных вершин для введённой Source Node вершины</li>
+            <li>Кнопка <b>Add Connection</b> - добавляет ребро между Source Node и Dest Node</li>
+            <li>Кнопка <b>Delete Connection</b> - удаляет ребро между Source Node и вершиой из List of neighbors nodes</li>
+        </ol>
+    </div>
+    <h2>Справка о компонентах управления алгоритмом</h2>
+    <div>
+        <ol>
+            <li>Кнопка <b>Start algorithm</b> - Запускает алгоритм нахождения мостов и визуализирует результат<br>
+            Если Step by step solution активен, то будет показана пошаговая работа алгоритма<br>
+            Если Step by step solution не активен, то будет показан только конечный результат</li>
+            <li>Кнопка <b>Start manually</b> - Позволяет выполнить алгоритм по нахождению мостов по шагам<br>
+            После нажатия на кнопку, будет выполнен один шаг алгоритма, после чего программа нарисует текущее состояние графа</li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

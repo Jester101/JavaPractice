@@ -64,6 +64,10 @@ public class MainWindow extends JPanel {
         constraints.gridy = y;
     }
 
+    public View getView() {
+        return visual_panel;
+    }
+
     private void setElementSize(int height, int width) {
 
         constraints.gridheight = height;
