@@ -50,6 +50,7 @@ public class FindBridge extends Algorithm {
         nodes = NewGraph.getNodes();
         if(drawGraph != null)
             drawGraph.setGraph(A);
+        editor.setGraph(NewGraph);
     }
 
     public void setDrawClass(MainWindow panel) {
@@ -131,6 +132,7 @@ public class FindBridge extends Algorithm {
             SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
             firstNode.addEdge(NewGraph.findByName(second));
         }
+        editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
 
@@ -139,6 +141,7 @@ public class FindBridge extends Algorithm {
             SimpleNode firstNode = (SimpleNode)NewGraph.findByName(first);
             firstNode.deleteConnection(second);
         }
+        editor.setGraph(NewGraph);
         drawGraph.drawGraph();
     }
 

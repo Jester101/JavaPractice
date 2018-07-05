@@ -16,17 +16,26 @@ public class View extends JPanel {
 
     private Line superline;
     private  Circle superCircle;
+    private TextArea area = new TextArea();
 
     public View() {
         super(null);
         lines = new ArrayList<>();
         circles = new ArrayList<>();
 
+        area.setEditable(false);
         superline = new Line(50,20,40,100);
         superCircle = new Circle(40,30,40,40);
     }
 
+    public void setText(String str) {
+        area.setText(str);
+        area.setSize(new Dimension(300,400));
+        add(area);
+    }
+
     public void addComponents(ArrayList<DrawNode> nodes, ArrayList<DrawEdge> edges){
+        removeAll();
         makeNodesList(nodes);
         makeEdgeList(edges);
         repaint();

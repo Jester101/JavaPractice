@@ -99,7 +99,8 @@ public class SimpleNode extends Node{
 
         SimpleNode dest = edge.getSourceNode();
         Edge newEdge = new Edge(this, (SimpleNode)dest);
-        edges_list.add(edge);
+        if(!checkConnection(dest))
+            edges_list.add(newEdge);
     }
 
     public boolean checkConnection(Node node) {
